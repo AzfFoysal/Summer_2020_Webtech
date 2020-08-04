@@ -1,62 +1,108 @@
 <?php
- 
- session_start();
- if(isset($_POST['submit']))
- {
+session_start();
+$error = "";
+if (isset($_POST['submit'])) {
+	$name = $_POST['name'];
+	$email = $_POST['email'];
+	$userId =$_POST['id'];
+	$password = $_POST['password'];
+	$confirmPassword = $_POST['confirmPassword'];
+	$userType = $_POST['userType'];
+	if (empty($name) || empty($email) ||  empty($userType) ||  empty($password) ||  empty($confirmPassword) || empty($userId)){
+		$error = "Required field is empty";
+	}else if ($password !=$confirmPassword) {
+		$error = "Two password not matched";
+	}else{
+		$file = fopen('users.txt', 'a');
+		fwrite($file, $userId.'|'.$password.'|'.$name.'|'.$email.'|'.$userType."/r/n");
+		fclose($file);
 
-        $id = $_POST['id'];
-        $name = $_POST['name'];
-	    	$email = $_POST['email'];
-        $password = $_POST['password'];
-        $conpassword = $_POST['confirmPassword'];
-        $user = $_POST['user'];
-        
-        
-        if(empty($name)||empty($email)||empty($password))
-        {
-            echo "null submission";
-        }
-        else if(empty($conpassword)||!isset($_POST['user']))
-        {
-          echo "null submission";
+		$_SESSION['success'] = 'Registration success..';
+header('Location: login.php');
+	}
+}
 
-        }
-        
-        
-        elseif($password != $conpassword)
-        {
-          echo "Warrning: Password and Confirm Password are not matched!";
-          echo "Please, do registration again!";
-        }
-       
 
-        else {
-
-          if($_POST['gender']=='Male')
-          {
-            $gender = 'Male';
-               
-          }
-          elseif($_POST['gender']=='Female')
-          {
-            $gender = 'Female';
-          }
-
-          elseif($_POST['gender']=='Other'){
-            $gender = 'Other';
-          }
-          
-         
-              $file = fopen('user.txt', 'a');
-			        fwrite($file,$id.'|'.'|'.$user.'|'. $name.'|'.$password.'|'.$email."/r/n");
-		        	fclose($file);
-    
-        
-          header('location:login.php');
-        }
-    
-      }
-      else{
-        header("location: login.php");
-      }
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Abu Zehad Foysal</title>
+</head>
+<body>
+	<br><br>
+	<center><?php if(!empty($error))echo $error;?></center><br>
+	<table border="1" align="center" width="60%">
+		<tr height="150px">
+			<td colspan="2">
+			<fieldset>
+			    <legend><b>REGISTRATION</b></legend>
+				<form action="" method="post">
+					<br/>
+					<table width="100%" cellpadding="0" cellspacing="0">
+						<tr>
+							<td>ID</td>
+							<td>:</td>
+							<td><input name="id" type="text"></td>
+							<td></td>
+						</tr>		
+						<tr><td colspan="4"><hr/></td></tr>
+						<tr>
+							<td>Password</td>
+							<td>:</td>
+							<td>
+								<input name="password" type="password">
+							</td>
+							<td></td>
+						</tr>		
+						<tr><td colspan="4"><hr/></td></tr>
+						<tr>
+							<td>Confirm Password</td>
+							<td>:</td>
+							<td><input name="confirmPassword" type="password"></td>
+							<td></td>
+						</tr>		
+						<tr><td colspan="4"><hr/></td></tr>
+						<tr>
+							<td>Name</td>
+							<td>:</td>
+							<td><input name="name" type="text"></td>
+							<td></td>
+						</tr>		
+						<tr><td colspan="4"><hr/></td></tr>
+						<tr>
+							<td>Email</td>
+							<td>:</td>
+							<td><input name="email" type="text"></td>
+							<td></td>
+						</tr>		
+						<tr><td colspan="4"><hr/></td></tr>
+						<tr>
+							<td>User Type</td>
+							<td>:</td>
+							<td>
+								<select name="userType">
+									<option value="user">User</option>
+									<option value="admin">Admin</option>
+								</select>
+							</td>
+							<td></td>
+						</tr>
+					</table>
+					<hr/>
+					<input type="submit" name="submit" value="Submit">
+					<input type="reset">
+				</form>
+			</fieldset>
+
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<center>Copyright &copy; Abu Zehad Foysal</center>
+			</td>
+		</tr>
+	</table>
+
+</body>
+</html>
