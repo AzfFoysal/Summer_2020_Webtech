@@ -125,6 +125,33 @@
 			}
 		}
 	}
+	if(isset($_POST['deleteCompany'])){
+
+		$id = $_POST['id'];
+		$company_name = $_POST['company_name'];
+		$profile_description = $_POST['profile_description'];
+		$industry = $_POST['industry'];
+		$company_website = $_POST['company_website'];
+		$filedir='../pictures/'.$id.".png";
+		$company = [
+			'id'=> $id,
+			'company_name'=> $company_name,
+			'profile_description'=> $profile_description,
+			'industry'=> $industry,
+			'company_website'=> $company_website,
+			'company_logo'=> $filedir,
+			'user_account_id'=> getId($_SESSION['username'])
+		];
+
+		$status = deleteCompany($company);
+
+		if($status){
+			header('location: ../views/companyInfo.php?success=done');
+		}
+		else{
+			header('location: ../views/deleteCompany.php?id={$id}');
+		}
+	}
 
 
 
