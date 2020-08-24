@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="degreeCheck.js"></script>
+    <title>Gender Validation</title>
+</head>
+<body>
+    <form action="degreeCheck.php" onsubmit="return Validate()" method="POST">
+        <fieldset style="width: 200px;">
+            <legend>Degree</legend>
+             <input type="checkbox" id="SSC" name="degree" onclick="Remover()" onmouseover="Remover()" onmouseout="eMpty()" >SSC
+             <input type="checkbox" id="HSC" name="degree" onclick="Remover()" onmouseover="Remover()" onmouseout="eMpty()" >HSC
+             <input type="checkbox" id="BSc" name="degree" onclick="Remover()" onmouseover="Remover()" onmouseout="eMpty()">BSc
+             
+        </fieldset>
+        <i id="degreeMsg"></i><br>
+        <input type="submit" name="submit" value="Submit" style="margin-top: 10px;">
+
+    </form>
+    
+    
+</body>
+</html>
