@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="emailCheck.js"></script>
+    <title>Email Input Validation</title>
+</head>
+
+<body>
+
+    <form action="emailCheck.php" onsubmit="return Validate()" method="POST">
+        Email <br>
+        <input type="text" id="email" name="email" style="margin-top: 5px;" onkeyup="Remover()" onblur="eMpty()"> 
+        <abbr title="hint: sample@example.com"><b>i</b></abbr>
+        <i id="emailMsg"></i>
+        <br>
+        <input type="submit" name="submit" value="Submit" style="margin-top: 10px;">
+    </form>
+    
+</body>
+</html>
